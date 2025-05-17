@@ -6,11 +6,11 @@ This guide outlines the configuration details for the current grey deployment te
 
 The purpose of this guide is basically to point out that you need to change: `051625grey` to `<someDate><someColor>`, e.g. `123199purple`. 
 
-**When I mention "update 051625grey to 123199purple, or see this checkbox below, consider that your queue to update the relevant file config**
+**When I mention "update 051625grey to 123199purple, or see this checkbox below, consider that your cue to update the relevant file config**
 
 - [ ] *051625grey -> 123199purple*
 
-It will also point out things you need to manually do-- such as setup the Github Repo, and its secrets, at listed below.  The github repo secrets you'll add will essentially be your production secrets.  CICD pulls them from github and injects them into your containers when they're created on the remote server.  **As a template for the prod secrets to add to the github repo secrets, use the ./github/defaults/env-defaults.yml** file's sections for the pertinent app (payload or postgresql-- just be sure to scramble them as appropriate.)
+It will also point out things you need to manually do-- such as setup the Github Repo, and its secrets, as listed below. The github repo secrets you'll add will essentially be your production secrets. CICD pulls them from github and injects them into your containers when they're created on the remote server. **As a template for the prod secrets to add to the github repo secrets, use the ./github/defaults/env-defaults.yml** file's sections for the pertinent app (payload or postgresql-- just be sure to scramble them as appropriate.)
 
 ## Repository Setup for Grey Deployment
 
@@ -27,37 +27,34 @@ To set up the grey deployment repository:
    - `LINUX_SERVER_IPADDRESS`: IP address of deployment server
    - `POSTGRES__SECRET_ENV_FILE`: Database environment variables
    - `PAYLOAD__SECRET_ENV_FILE`: CMS environment variables
-   - `GHPAT__REPO_WORKFLOW_WRDPACKAGES`: GitHub Personal Access Token with repository, workflow, and package read/write permissions
+   - `GHPATCICD_RpoWkflo_WRDpckgs_051425`: GitHub Personal Access Token with repository, workflow, and package read/write permissions
 
 ## Configuration Files for Grey Deployment
 
 ### 1. Main Workflow File (z-main.yml)
 
-The environment variables are already configured for grey deployment:
+The workflow file is configured with hardcoded values:
 
 - [ ] *051625grey -> 123199purple*
 
 ```yaml
-env:
-  # Core project identifiers
-  TOPIC_NAME: "payloadcms"
-  DEPLOYMENT_DATE: "051625"
-  DEPLOYMENT_COLOR: "grey"
-  
-  # Derived naming variables
-  REPO_NAME: "payloadcms-051625grey"
-  CMS_DIR_NAME: "payloadcms-cms-portfolio2025" # Directory containing CMS code
-  
-  # Container registry configuration
-  CONTAINER_REGISTRY: "ghcr.io"
-  GITHUB_CONTAINER_USERNAME: "${{ github.actor }}"
+# In database job:
+with:
+  environment: production
+  topic_name: payloadcms
+  deployment_date: 051625
+  deployment_color: grey
+  db_container_name: payloadcms-051625grey-db
 
-  # Container naming
-  DB_CONTAINER_NAME: "payloadcms-051625grey-db"
-  CMS_CONTAINER_NAME: "payloadcms-051625grey-cms"
-  
-  # Docker image reference
-  CMS_IMAGE_NAME: "ghcr.io/${{ github.actor }}/payloadcms-051625grey-cms:latest"
+# In cms-fe job:
+with:
+  environment: production
+  topic_name: payloadcms
+  deployment_date: 051625
+  deployment_color: grey
+  cms_dir_name: payloadcms-cms
+  cms_container_name: payloadcms-051625grey-cms
+  cms_image_name: ghcr.io/${{ github.actor }}/payloadcms-051625grey-cms:latest
 ```
 
 ### 2. Local Development Docker Compose File (docker-compose.local.yml)
@@ -139,10 +136,7 @@ POSTGRES_PASSWORD=payloadcmsPass
 
 No changes needed to the individual workflow files (`a-db-init.yml` and `b-cms-fe-check-deploy.yml`) because they accept parameters from the main workflow file.
 
-
-
-# ALL DONE with updates!  Below shows the resources which will be created.
-
+# ALL DONE with updates! Below shows the resources which will be created.
 
 ## Resources Created By Grey Deployment
 
