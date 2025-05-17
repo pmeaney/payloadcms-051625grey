@@ -34,8 +34,8 @@ env:
 
 on:
   push:
-    # branches: [main]
-    branches: [blah]
+    branches: [main]
+    # branches: [blah]
 
 permissions:
   contents: read
