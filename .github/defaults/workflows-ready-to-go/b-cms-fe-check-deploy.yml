@@ -32,11 +32,11 @@ on:
         type: string
         description: "Docker image name for the CMS"
     secrets:
-      LINUX_SSH_PRIVATE_KEY:
+      LINUX_SSH_PRIVATE_KEY_CICD:
         required: true
       LINUX_USERNAME_CICD:
         required: true
-      LINUX_SERVER_IP:
+      LINUX_SERVER_IPADDRESS:
         required: true
       GHPAT_AS_CICD_SECRET:
         required: true
@@ -203,9 +203,9 @@ jobs:
       - name: Create production migrations directory on server if it doesn't exist
         if: steps.check-changes.outputs.changes == 'true'
         env:
-          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
           SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
-          SERVER_IP: ${{ secrets.LINUX_SERVER_IP }}
+          SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
         run: |
           # Setup SSH
           mkdir -p ~/.ssh/
@@ -236,9 +236,9 @@ jobs:
       - name: SSH in and Deploy Updated CMS-Frontend image with Prod Secrets
         id: step-deploy--cms-fe
         env:
-          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
           SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
-          SERVER_IP: ${{ secrets.LINUX_SERVER_IP }}
+          SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
           GHPAT: ${{ secrets.GHPAT_AS_CICD_SECRET }}
           PAYLOADCMS__PROD_ENV: ${{ secrets.PAYLOAD__SECRET_ENV_FILE }}
         run: |

@@ -22,9 +22,9 @@ To set up the grey deployment repository:
 - `payloadcms-051625grey`
 
 2. **Set up repository secrets** in the repo:
-   - `LINUX_SSH_PRIVATE_KEY`: SSH key for deployment server access
+   - `LINUX_SSH_PRIVATE_KEY_CICD`: SSH key for deployment server access
    - `LINUX_USERNAME_CICD`: Username for SSH access
-   - `LINUX_SERVER_IP`: IP address of deployment server
+   - `LINUX_SERVER_IPADDRESS`: IP address of deployment server
    - `POSTGRES__SECRET_ENV_FILE`: Database environment variables
    - `PAYLOAD__SECRET_ENV_FILE`: CMS environment variables
    - `GHPAT__REPO_WORKFLOW_WRDPACKAGES`: GitHub Personal Access Token with repository, workflow, and package read/write permissions

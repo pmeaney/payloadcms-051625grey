@@ -24,11 +24,11 @@ on:
         type: string
         description: "Name for the database container"
     secrets:
-      LINUX_SSH_PRIVATE_KEY:
+      LINUX_SSH_PRIVATE_KEY_CICD:
         required: true
       LINUX_USERNAME_CICD:
         required: true
-      LINUX_SERVER_IP:
+      LINUX_SERVER_IPADDRESS:
         required: true
       POSTGRES__SECRET_ENV_FILE:
         required: true
@@ -53,9 +53,9 @@ jobs:
       - name: Check if Postgres Deployment needed
         id: check-depl-needed--db
         env:
-          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
           SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
-          SERVER_IP: ${{ secrets.LINUX_SERVER_IP }}
+          SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
           DEPLOY_POSTGRES_NEEDED: true
         run: |
           # Debug environment variables
@@ -92,9 +92,9 @@ jobs:
       - name: Deploy DB Container on remote server
         if: steps.check-depl-needed--db.outputs.needs_depl__db == 'true'
         env:
-          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY }}
+          SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
           SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
-          SERVER_IP: ${{ secrets.LINUX_SERVER_IP }}
+          SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
           POSTGRES__PROD_ENV: ${{ secrets.POSTGRES__SECRET_ENV_FILE }}
           DEPLOY_POSTGRES_NEEDED: true
         run: |
