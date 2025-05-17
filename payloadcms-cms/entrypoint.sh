@@ -44,8 +44,8 @@ done
 # Note: This is needed even with bind mounts because:
 # 1. The container needs the directory to exist with proper permissions
 # 2. It ensures the directory path is valid before PayloadCMS tries to access it
-# 3. It works as a fallback in case the host directory (~/payloadcms-cms-fe__migrations) wasn't properly mounted
-# (CICD makes the mounts the binded directories via this: `-v ~/payloadcms-cms-fe__migrations:/app/src/migrations`)
+# 3. It works as a fallback in case the host directory (~/payloadcms-cms__migrations) wasn't properly mounted
+# (CICD makes the mounts the binded directories via this: `-v ~/payloadcms-cms__migrations:/app/src/migrations`)
 # (Hence, here, we're just making sure the directory exists in the container, and letting it be accessible)
 if [ ! -d "/app/src/migrations" ]; then
   echo "Migrations directory doesn't exist in container, creating..."

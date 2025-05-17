@@ -34,7 +34,7 @@ on:
     secrets:
       LINUX_SSH_PRIVATE_KEY_CICD:
         required: true
-      LINUX_USERNAME_CICD:
+      LINUX_BOTCICDGHA_USERNAME:
         required: true
       LINUX_SERVER_IPADDRESS:
         required: true
@@ -204,7 +204,7 @@ jobs:
         if: steps.check-changes.outputs.changes == 'true'
         env:
           SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
-          SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
+          SSH_USER: ${{ secrets.LINUX_BOTCICDGHA_USERNAME }}
           SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
         run: |
           # Setup SSH
@@ -237,7 +237,7 @@ jobs:
         id: step-deploy--cms-fe
         env:
           SSH_KEY: ${{ secrets.LINUX_SSH_PRIVATE_KEY_CICD }}
-          SSH_USER: ${{ secrets.LINUX_USERNAME_CICD }}
+          SSH_USER: ${{ secrets.LINUX_BOTCICDGHA_USERNAME }}
           SERVER_IP: ${{ secrets.LINUX_SERVER_IPADDRESS }}
           GHPAT: ${{ secrets.GHPAT_AS_CICD_SECRET }}
           PAYLOADCMS__PROD_ENV: ${{ secrets.PAYLOAD__SECRET_ENV_FILE }}

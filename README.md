@@ -13,7 +13,7 @@ This template implements a Dockerized CICD deployment of PayloadCMS and PostgreS
 ## Project Components:
 
 - **PayloadCMS Application Container**
-  - Built via Dockerfile from the official PayloadCMS Template in the `./payloadcms-cms-fe` directory, with strategic enhancements:
+  - Built via Dockerfile from the official PayloadCMS Template in the `./payloadcms-cms` directory, with strategic enhancements:
     - Optimized Dockerfile
     - Custom entrypoint script
     - Integrated "remote-first, local sync" process for media and migration files, ensuring your local development environment mirrors the production server
@@ -102,7 +102,7 @@ docker compose -f docker-compose.local.yml up -d && docker compose -f docker-com
 
 This project follows a **Remote First, Local Sync** strategy.
 
-Which means... to develop a project on the template, you'll need to reploy it to a remote server (1cvpu, 2gb ram minimum).  From there, you can run the `./payloadcms-cms-fe/sync-from-prod.sh` script, which will pull the migration & media directories from the live remote server... down to your local laptop.  From there, you can run the Local Docker Development command `docker compose -f docker-compose.local.yml up -d && docker compose -f docker-compose.local.yml logs -f` and your local environment at `localhost:3000` on your browser should mimic what you see at your live webiste.  It populates your local project with the same setup (database schema & data, and media files) that the project has on your remote server.
+Which means... to develop a project on the template, you'll need to reploy it to a remote server (1cvpu, 2gb ram minimum).  From there, you can run the `./payloadcms-cms/sync-from-prod.sh` script, which will pull the migration & media directories from the live remote server... down to your local laptop.  From there, you can run the Local Docker Development command `docker compose -f docker-compose.local.yml up -d && docker compose -f docker-compose.local.yml logs -f` and your local environment at `localhost:3000` on your browser should mimic what you see at your live webiste.  It populates your local project with the same setup (database schema & data, and media files) that the project has on your remote server.
 
 
 ## Resources
@@ -230,7 +230,7 @@ flowchart TB
         CreateEnvFile --> PullImage["docker pull
         ghcr.io/pmeaney/portfolio-payloadcms:latest"]
         PullImage --> RemoveOldContainer["docker rm -f
-        payloadcms-cms-fe-portfolio-prod"]
+        payloadcms-cms-portfolio-prod"]
         RemoveOldContainer --> RunContainer["docker run
         - Set container name
         - Connect to postgres network

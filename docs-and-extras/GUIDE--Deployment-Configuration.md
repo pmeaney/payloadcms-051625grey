@@ -23,7 +23,7 @@ To set up the grey deployment repository:
 
 2. **Set up repository secrets** in the repo:
    - `LINUX_SSH_PRIVATE_KEY_CICD`: SSH key for deployment server access
-   - `LINUX_USERNAME_CICD`: Username for SSH access
+   - `LINUX_BOTCICDGHA_USERNAME`: Username for SSH access
    - `LINUX_SERVER_IPADDRESS`: IP address of deployment server
    - `POSTGRES__SECRET_ENV_FILE`: Database environment variables
    - `PAYLOAD__SECRET_ENV_FILE`: CMS environment variables
@@ -46,7 +46,7 @@ env:
   
   # Derived naming variables
   REPO_NAME: "payloadcms-051625grey"
-  CMS_DIR_NAME: "payloadcms-cms-fe-portfolio2025" # Directory containing CMS code
+  CMS_DIR_NAME: "payloadcms-cms-portfolio2025" # Directory containing CMS code
   
   # Container registry configuration
   CONTAINER_REGISTRY: "ghcr.io"

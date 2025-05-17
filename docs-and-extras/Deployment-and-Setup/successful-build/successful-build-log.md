@@ -11,7 +11,7 @@ PostgreSQL is ready!
 The /src/migration directory is empty.
 Creating initial migration...
 
-> payloadcms-cms-fe@1.0.0 payload:migrate:create /app
+> payloadcms-cms@1.0.0 payload:migrate:create /app
 > cross-env NODE_OPTIONS=--no-deprecation payload migrate:create --name initial
 
 [20:42:52] WARN: No email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.
@@ -20,7 +20,7 @@ Creating initial migration...
 Initial migration created and accessible in the host filesystem.
 Running initial migration...
 
-> payloadcms-cms-fe@1.0.0 payload:migrate /app
+> payloadcms-cms@1.0.0 payload:migrate /app
 > cross-env NODE_OPTIONS=--no-deprecation payload migrate --force-accept-warning
 
 [20:43:06] WARN: No email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.
@@ -30,7 +30,7 @@ Running initial migration...
 [20:43:07] INFO: Done.
 Running Next.js build...
 
-> payloadcms-cms-fe@1.0.0 build /app
+> payloadcms-cms@1.0.0 build /app
 > cross-env NODE_OPTIONS=--no-deprecation next build
 
 Attention: Next.js now collects completely anonymous telemetry regarding usage.
@@ -81,7 +81,7 @@ Route (app)                                 Size  First Load JS  Revalidate  Exp
 ƒ  (Dynamic)  server-rendered on demand
 
 
-> payloadcms-cms-fe@1.0.0 postbuild /app
+> payloadcms-cms@1.0.0 postbuild /app
 > next-sitemap --config next-sitemap.config.cjs
 
 ✨ [next-sitemap] Loading next-sitemap config: file:///app/next-sitemap.config.cjs
@@ -100,7 +100,7 @@ Route (app)                                 Size  First Load JS  Revalidate  Exp
 
 
 
-> payloadcms-cms-fe@1.0.0 postbuild /app
+> payloadcms-cms@1.0.0 postbuild /app
 > next-sitemap --config next-sitemap.config.cjs
 
 ✨ [next-sitemap] Loading next-sitemap config: file:///app/next-sitemap.config.cjs
@@ -120,7 +120,7 @@ Route (app)                                 Size  First Load JS  Revalidate  Exp
 
 Starting Next.js application...
 
-> payloadcms-cms-fe@1.0.0 start /app
+> payloadcms-cms@1.0.0 start /app
 > cross-env NODE_OPTIONS=--no-deprecation next start
 
    ▲ Next.js 15.2.3

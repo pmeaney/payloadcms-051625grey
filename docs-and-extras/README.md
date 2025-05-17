@@ -16,7 +16,7 @@ Stack:
 - Delete migration files if they exist-- I'll clear that up soon, might need to tinker a little more
 - Run `docker compose -f docker-compose.dev.yml up`
   - This spins up a Postgres DB, then a PayloadCMS instance.
-  - The PayloadCMS instance will run an entrypoint.sh file once its up and running, which, if no migration exists yet (they shouldn't on the first run-- so, just make sure ./payloadcms-cms-fe-portfolio2025/src/migrations is clear on the first deployment), will create the initial one.  Once the app is up and running, you'll be able to log into its admin dashboard on the browser at `localhost:3000/admin` and run a database seeding process which will create migration files & seed the website template with placeholder blog content.
+  - The PayloadCMS instance will run an entrypoint.sh file once its up and running, which, if no migration exists yet (they shouldn't on the first run-- so, just make sure ./payloadcms-cms-portfolio2025/src/migrations is clear on the first deployment), will create the initial one.  Once the app is up and running, you'll be able to log into its admin dashboard on the browser at `localhost:3000/admin` and run a database seeding process which will create migration files & seed the website template with placeholder blog content.
 
 
 ## Remote / CICD things to be aware of:
@@ -36,7 +36,7 @@ The PayloadCMS Website Template
 1. Ready to deploy
 2. Ready to edit and push new changes to the server on every commit.
 3. For deployment, currently, the migration process is extremely simple: The inital migration runs, at which point, you log into the browser admin, from there click the option to seed the database.  This seeds the project into a basic PayloadCMS / NextJS / PostgreSQL blog template.  
-4. (From here, you'll either want to manually log in & commit those migration files (see below) or uncomment the CMS's CICD file (.github/workflows/b-cms-fe-check-deploy.yml), Lines 274-340 -- which upload the files from their bindmount location (the remote server's directory `/home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__migrations` to the github repo).  It's left in for reference.  More info below.  **After commenting those lines back in, the next commit will pick up the migration files & commit them to the repo**. I'll likely separate that out in the near future, as I begin working with PayloadCMS)
+4. (From here, you'll either want to manually log in & commit those migration files (see below) or uncomment the CMS's CICD file (.github/workflows/b-cms-fe-check-deploy.yml), Lines 274-340 -- which upload the files from their bindmount location (the remote server's directory `/home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__migrations` to the github repo).  It's left in for reference.  More info below.  **After commenting those lines back in, the next commit will pick up the migration files & commit them to the repo**. I'll likely separate that out in the near future, as I begin working with PayloadCMS)
 
 
 ## Current state 
@@ -74,16 +74,16 @@ Since this project involves bind mounts, you can find those via this command:
 humanDevOpsUser@server2025-debian:~$ docker inspect -f '{{json .Mounts}}' containerNameOrID
 
 # Outputs: 
-[{"Type":"bind","Source":"/home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__migrations","Destination":"/app/src/migrations","Mode":"","RW":true,"Propagation":"rprivate"}]
+[{"Type":"bind","Source":"/home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__migrations","Destination":"/app/src/migrations","Mode":"","RW":true,"Propagation":"rprivate"}]
 
 humanDevOpsUser@server2025-debian:~$ docker inspect -f '{{range .Mounts}}{{if eq .Type "bind"}}{{.Source}} -> {{.Destination}}{{println}}{{end}}{{end}}' containerNameOrID
 
 # Outputs: 
-/home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__migrations -> /app/src/migrations
+/home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__migrations -> /app/src/migrations
 
 ```
 
-We see the bind mount for the PayloadCMS is setup via the deployment (see its CICD File) is setup at this directory: /home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__migrations
+We see the bind mount for the PayloadCMS is setup via the deployment (see its CICD File) is setup at this directory: /home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__migrations
 
 Check out its parent directory... It probably shows two directories-- the CMS & DB both have a bind mount for their respective database related files.
 
@@ -91,12 +91,12 @@ For clearing out all data (e.g. for a fresh start, if you've run the migration b
 
 ```bash
 humanDevOpsUser@server2025-debian:~$ ls /home/ghaCICDDevOpsUser
-payloadcms-cms-fe-portfolio2025__migrations  payloadcms-postgres-db-portfolio2025
+payloadcms-cms-portfolio2025__migrations  payloadcms-postgres-db-portfolio2025
 ```
 
 So, delete both of those:
 ```bash
-humanDevOpsUser@server2025-debian:~$ sudo rm -rf payloadcms-cms-fe-portfolio2025__migrations && \
+humanDevOpsUser@server2025-debian:~$ sudo rm -rf payloadcms-cms-portfolio2025__migrations && \
 humanDevOpsUser@server2025-debian:~$ sudo rm -rf payloadcms-postgres-db-portfolio2025
 ```
 
@@ -255,7 +255,7 @@ flowchart TB
         CreateEnvFile --> PullImage["docker pull
         ghcr.io/pmeaney/portfolio-payloadcms:latest"]
         PullImage --> RemoveOldContainer["docker rm -f
-        payloadcms-cms-fe-portfolio-prod"]
+        payloadcms-cms-portfolio-prod"]
         RemoveOldContainer --> RunContainer["docker run
         - Set container name
         - Connect to postgres network
@@ -333,8 +333,8 @@ Clearing out the old project
 delete bind mounts & volumes, then cleanup
 
 ```
-sudo rm -rf /home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__migrations/
-sudo rm -rf /home/ghaCICDDevOpsUser/payloadcms-cms-fe-portfolio2025__media/
+sudo rm -rf /home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__migrations/
+sudo rm -rf /home/ghaCICDDevOpsUser/payloadcms-cms-portfolio2025__media/
 sudo rm -rf /home/ghaCICDDevOpsUser/payloadcms-postgres-db-portfolio2025/
 docker volume rm payloadcms-postgres-data-prod && docker volume rm payloadcms-postgres-init-scripts-prod
 
