@@ -4,13 +4,13 @@ services:
     image: postgres:17
     container_name: payloadcms-db-051625grey
     env_file:
-      - ./payloadcms-db-051625grey/.env
+      - ./payloadcms-051625grey-db/.env
     ports:
       - "5432:5432"
     volumes:
       # Bind mounts - directories from your host mapped into the container
-      - ./payloadcms-db-051625grey/pg-data-payloadcms:/var/lib/postgresql/data
-      - ./payloadcms-db-051625grey/init-scripts:/docker-entrypoint-initdb.d
+      - ./payloadcms-051625grey-db/pg-data-payloadcms:/var/lib/postgresql/data
+      - ./payloadcms-051625grey-db/init-scripts:/docker-entrypoint-initdb.d
     networks:
       - dockernet-payloadcms-grey
 
@@ -20,7 +20,7 @@ services:
     working_dir: /app
     volumes:
       # Bind mount - maps host directory to container for live code editing
-      - ./payloadcms-cms:/app
+      - ./payloadcms-051625grey-cms:/app
       
       # Named volumes for performance - Docker-managed storage, not bind mounts
       # Benefits: 1) Faster I/O operations, especially on macOS/Windows (avoids filesystem translation)
@@ -31,7 +31,7 @@ services:
       - payloadcms_next_cache:/app/.next
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
     env_file:
-      - ./payloadcms-cms-051625grey/.env
+      - ./payloadcms-051625grey-cms/.env
     ports:
       - "3000:3000"
     networks:

@@ -98,6 +98,11 @@ You'll want to clone the project, follow my terraform deployment guide, then fol
 docker compose -f docker-compose.local.yml up -d && docker compose -f docker-compose.local.yml logs -f
 ```
 
+### Helpful commands
+
+- Connect to postgresql, once sshed into server (uses default credentials):
+  - `docker exec -it payloadcms-051625grey-db psql -U payloadcms-051625grey-user -d payloadcms-051625grey-db`
+
 ### Local Docker After Remote Development
 
 This project follows a **Remote First, Local Sync** strategy.
