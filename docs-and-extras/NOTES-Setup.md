@@ -25,7 +25,7 @@ e.g.
 - repo: payloadcms-051625grey
 - containers:
   - payloadcms-051625grey-cms
-  - payloadcms-051625grey-db
+  - payloadcms-db-051625grey
 - published docker package:
   - payloadcms-051625grey-cms:latest
 

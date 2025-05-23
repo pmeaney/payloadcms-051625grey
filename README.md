@@ -101,7 +101,7 @@ docker compose -f docker-compose.local.yml up -d && docker compose -f docker-com
 ### Helpful commands
 
 - Connect to postgresql, once sshed into server (uses default credentials):
-  - `docker exec -it payloadcms-051625grey-db psql -U payloadcms-051625grey-user -d payloadcms-051625grey-db`
+  - `docker exec -it payloadcms-db-051625grey psql -U payloadcms-051625grey-user -d payloadcms-db-051625grey`
 
 ### Local Docker After Remote Development
 

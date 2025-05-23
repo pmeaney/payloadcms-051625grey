@@ -4,13 +4,13 @@ services:
     image: postgres:17
     container_name: payloadcms-db-051625grey
     env_file:
-      - ./payloadcms-051625grey-db/.env
+      - ./payloadcms-db-051625grey/.env
     ports:
       - "5432:5432"
     volumes:
       # Bind mounts - directories from your host mapped into the container
-      - ./payloadcms-051625grey-db/pg-data-payloadcms:/var/lib/postgresql/data
-      - ./payloadcms-051625grey-db/init-scripts:/docker-entrypoint-initdb.d
+      - ./payloadcms-db-051625grey/pg-data-payloadcms:/var/lib/postgresql/data
+      - ./payloadcms-db-051625grey/init-scripts:/docker-entrypoint-initdb.d
     networks:
       - dockernet-payloadcms-grey
 

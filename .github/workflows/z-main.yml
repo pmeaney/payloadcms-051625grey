@@ -6,7 +6,7 @@ name: Main Deployment Pipeline
 # --------------------------------------------------------------------
 # This project follows a structured naming convention:
 # Repository: topicname-dateColor     (e.g., payloadcms-051625grey)
-# Containers: topicname-dateColor-app (e.g., payloadcms-051625grey-cms, payloadcms-051625grey-db)
+# Containers: topicname-dateColor-app (e.g., payloadcms-051625grey-cms, payloadcms-db-051625grey)
 # This naming approach makes it easy to generate blue/green deployments
 # --------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ jobs:
       topic_name: payloadcms
       deployment_date: 051625
       deployment_color: grey
-      db_container_name: payloadcms-051625grey-db
+      db_container_name: payloadcms-db-051625grey
     permissions:
       contents: read
     secrets:
@@ -89,7 +89,7 @@ jobs:
           TOPIC_NAME="payloadcms"
           DEPLOYMENT_DATE="051625"
           DEPLOYMENT_COLOR="grey"
-          DB_CONTAINER_NAME="payloadcms-051625grey-db"
+          DB_CONTAINER_NAME="payloadcms-db-051625grey"
           CMS_CONTAINER_NAME="payloadcms-051625grey-cms"
           CMS_IMAGE_NAME="ghcr.io/${{ github.actor }}/payloadcms-051625grey-cms:latest"
           CMS_DIR_NAME="payloadcms-cms"

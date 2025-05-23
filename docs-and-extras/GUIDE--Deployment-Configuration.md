@@ -44,7 +44,7 @@ with:
   topic_name: payloadcms
   deployment_date: 051625
   deployment_color: grey
-  db_container_name: payloadcms-051625grey-db
+  db_container_name: payloadcms-db-051625grey
 
 # In cms-fe job:
 with:
@@ -95,12 +95,12 @@ networks:
 #### a. `.github/defaults/env-defaults.yml`
 ```yaml
 postgres_defaults: |
-  POSTGRES_DB=payloadcms-051625grey-db
+  POSTGRES_DB=payloadcms-db-051625grey
   POSTGRES_USER=payloadcms-051625grey-user
   POSTGRES_PASSWORD=payloadcmsPass
 
 payloadcms_defaults: |
-  DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-051625grey-db:5432/payloadcms-051625grey-db
+  DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-db-051625grey:5432/payloadcms-db-051625grey
   PAYLOAD_SECRET=0505d1e544a564c8730e83fb
   NEXT_PUBLIC_SERVER_URL=http://localhost:3000
   CRON_SECRET=YOUR_CRON_SECRET_HERE
@@ -111,7 +111,7 @@ payloadcms_defaults: |
 
 #### b. CMS `.env` (development)
 ```
-DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-051625grey-db:5432/payloadcms-051625grey-db
+DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-db-051625grey:5432/payloadcms-db-051625grey
 PAYLOAD_SECRET=7596b4a8fcc3d8086f8f5001
 NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 CRON_SECRET=YOUR_CRON_SECRET_HERE
@@ -120,14 +120,14 @@ PREVIEW_SECRET=YOUR_SECRET_HERE
 
 #### c. DB `.env`
 ```
-POSTGRES_DB=payloadcms-051625grey-db
+POSTGRES_DB=payloadcms-db-051625grey
 POSTGRES_USER=payloadcms-051625grey-user
 POSTGRES_PASSWORD=payloadcmsPass
 ```
 
 #### d. `example-postgres-env.env`
 ```
-POSTGRES_DB=payloadcms-051625grey-db
+POSTGRES_DB=payloadcms-db-051625grey
 POSTGRES_USER=payloadcms-051625grey-user
 POSTGRES_PASSWORD=payloadcmsPass
 ```
@@ -146,7 +146,7 @@ The grey deployment will create the following resources:
 - **Grey Deployment Image**: `ghcr.io/[username]/payloadcms-051625grey-cms:latest`
 
 ### Docker Containers
-- **Grey Database**: `payloadcms-051625grey-db`
+- **Grey Database**: `payloadcms-db-051625grey`
 - **Grey CMS**: `payloadcms-051625grey-cms`
 
 ### Docker Networks
@@ -154,8 +154,8 @@ The grey deployment will create the following resources:
 - Also connects to: `main-network--npm020325` (shared)
 
 ### Docker Volumes
-- **Grey Database Data**: `payloadcms-051625grey-db-data`
-- **Grey Database Init Scripts**: `payloadcms-051625grey-db-init-scripts`
+- **Grey Database Data**: `payloadcms-db-051625grey-data`
+- **Grey Database Init Scripts**: `payloadcms-db-051625grey-init-scripts`
 
 ### Host Directories (on Deployment Server)
 - **Grey CMS Migrations**: `~/payloadcms-051625grey-cms__migrations`

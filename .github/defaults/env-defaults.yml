@@ -9,7 +9,7 @@
 #  and of course, ensure that those production secrets are brand new values for the relevant security-relevant items))
 ---
 postgres_defaults: |
-  POSTGRES_DB=payloadcms-051625grey-db
+  POSTGRES_DB=payloadcms-db-051625grey
   POSTGRES_USER=payloadcms-051625grey-user
   POSTGRES_PASSWORD=payloadcmsPass
 
@@ -17,8 +17,8 @@ postgres_defaults: |
 # 1. Do not include the two secrets at the bottom-- both have "SKIP" in their name. Delete them.)
 # 2. Be use to update 'NEXT_PUBLIC_SERVER_URL' to your live URL once ready-- for use by next.config.js
 payloadcms_defaults: |
-  DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-051625grey-db:5432/payloadcms-051625grey-db
-  PAYLOAD_SECRET=0505d1e544a564c8730e83fb
+  DATABASE_URI=postgres://payloadcms-051625grey-user:payloadcmsPass@payloadcms-db-051625grey:5432/payloadcms-db-051625grey
+  PAYLOAD_SECRET=7596b4a8fcc3d8086f8f5001
   NEXT_PUBLIC_SERVER_URL=http://localhost:3000
   CRON_SECRET=YOUR_CRON_SECRET_HERE
   PREVIEW_SECRET=YOUR_SECRET_HERE
