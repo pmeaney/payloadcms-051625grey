@@ -1,3 +1,7 @@
+## Deprecated & Moved
+
+This project is deprecated in favor of [payloadcms-052225blue](https://github.com/pmeaney/payloadcms-052225blue).  Blue was based on Grey.  But now that I have Blue, I am moving forward with Blue, and Green will be spawned from Blue.
+
 # Grey Template for Blue-Green Deployment of PayloadCMS
 
 >A template ready to turn into a basic Dockerized, Github Actions CICD-deployed PayloadCMS project (e.g. blue-green)
